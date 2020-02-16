@@ -9,7 +9,7 @@ case "$1" in
       --name kali \
       -u kali \
       satotoru/kali:latest bash -c \
-      "vncserver -geometry $dimension && tail -f ~/.vnc/*.log"
+      "rm -f /tmp/.X1-lock && vncserver -geometry $dimension && tail -f ~/.vnc/*.log"
     ;;
 
   save)

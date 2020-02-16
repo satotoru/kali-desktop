@@ -16,7 +16,6 @@ RUN apt-get install -y \
       fonts-vlgothic
 
 RUN apt-get install -y \
-      xfce4-terminal \
       x11-xserver-utils \
       fcitx \
       fcitx-mozc \
@@ -38,12 +37,9 @@ ENV DEBIAN_FRONTEND dialog
 
 ENV USER kali
 ENV HOME /home/${USER}
-RUN useradd -m ${USER}
+RUN useradd -m ${USER} -s /bin/bash
 RUN gpasswd -a ${USER} sudo
 RUN echo "${USER}:${USER}" | chpasswd
-
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
 
 USER kali
 WORKDIR /home/kali

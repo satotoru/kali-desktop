@@ -1,0 +1,33 @@
+#!/bin/sh
+
+dimension=`xdpyinfo | grep 'dimension' | awk '{print $2}'`
+
+case "$1" in
+  start)
+    docker run --rm -it \
+      --net host \
+      --name kali \
+      -u kali \
+      satotoru/kali:latest bash -c \
+      "vncserver -geometry $dimension && tail -f ~/.vnc/*.log"
+    ;;
+
+  save)
+    docker commit kali satotoru/kali:latest
+    ;;
+
+  kill)
+    docker kill kali
+    ;;
+
+  build)
+    docker build . -t satotoru/kali
+    ;;
+
+  *)
+    echo "Usage start|save|build"
+    exit 1
+    ;;
+esac
+
+exit 0

@@ -24,8 +24,12 @@ case "$1" in
     docker build . -t satotoru/kali
     ;;
 
+  connect)
+    vncviewer 127.0.0.1:5901 -FullScreen
+    ;;
+
   *)
-    echo "Usage start|save|build"
+    echo "Usage start|save|build|connect"
     exit 1
     ;;
 esac

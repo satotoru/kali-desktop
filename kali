@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 dimension=`xdpyinfo | grep 'dimension' | awk '{print $2}'`
 
@@ -12,6 +12,9 @@ case "$1" in
       "rm -f /tmp/.X1-lock && vncserver -geometry $dimension && tail -f ~/.vnc/*.log"
     ;;
 
+  exec)
+    docker exec -it kali ${@:2}
+    ;;
   save)
     docker commit kali satotoru/kali:latest
     ;;
